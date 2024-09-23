@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Kółko i Krzyżyk</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Kółko i Krzyżyk</h1>
+    <form method="POST">
+        <input type="text" name="nickname" placeholder="Wpisz swój nick" required>
+        <button type="submit">Zagraj</button>
+    </form>
+    <h2>Ranking</h2>
+    <table>
+        <tr>
+            <th>Nick</th>
+            <th>Zwycięstwa</th>
+        </tr>
+        {% for player in players %}
+        <tr>
+            <td>{{ player.nickname }}</td>
+            <td>{{ player.wins }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

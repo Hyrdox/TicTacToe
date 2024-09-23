@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Gra - Kółko i Krzyżyk</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Kółko i Krzyżyk</h1>
+    <form method="POST">
+        <div class="board">
+            {% for i in range(9) %}
+            <button type="submit" name="move" value="{{ i }}" {{ 'disabled' if board[i] or winner or draw else '' }}>
+                {{ board[i] }}
+            </button>
+            <input type="hidden" name="board" value="{{ board[i] }}">
+            {% endfor %}
+        </div>
+    </form>
+    {% if winner %}
+        <h2>Wygrał: {{ 'Gracz' if winner == 'X' else 'Komputer' }}</h2>
+        <a href="{{ url_for('game') }}">Zagraj ponownie</a>
+    {% elif draw %}
+        <h2>Remis!</h2>
+        <a href="{{ url_for('game') }}">Zagraj ponownie</a>
+    {% endif %}
+    <a href="{{ url_for('logout') }}">Wyloguj</a>
+</body>
+</html>
